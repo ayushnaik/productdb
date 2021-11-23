@@ -1,0 +1,187 @@
+<div class="row">
+  <div class="col">
+    <mat-card>
+      <mat-card-title>Category </mat-card-title>
+      <div>
+        <form>
+          <div>
+            <div><label>Category Name: </label></div>
+            <mat-form-field appearance="fill">
+              <input
+                matInput
+                placeholder="Enter a Category Name"
+                name="categoryName"
+                [(ngModel)]="categoryName"
+                (ngModelChange)="validate()"
+              /> </mat-form-field
+            >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button color="primary" (click)="addCategory(); getAllCategory();">
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>Product </mat-card-title>
+      <div>
+        <form>
+          <div>
+            <div><label>Product Name: </label></div>
+            <mat-form-field appearance="fill">
+              <input
+                matInput
+                placeholder="Enter a Product Name."
+                name="prodName"
+                [(ngModel)]="prodName"
+                (ngModelChange)="validate()"
+              />
+            </mat-form-field>
+          </div>
+          <div>
+            <div><label>Product Price: </label></div>
+            <mat-form-field appearance="fill">
+              <input
+                matInput
+                placeholder="Enter a Product Price."
+                name="prodPrice"
+                [(ngModel)]="prodPrice"
+                (ngModelChange)="validate()"
+              />
+            </mat-form-field>
+          </div>
+          <div>
+            <form [formGroup]="form">
+              <div><label for="categories">Category:</label></div>
+              <mat-form-field appearance="fill">
+                <mat-select
+                  formControlName="categories"
+                  id="categories"
+                  placeholder="Enter a Category."
+                >
+                  <mat-option
+                    (click)="onCategoryChange(categories[i]._id)"
+                    *ngFor="let categor of categories; let i = index"
+                    [value]="categories[i]._id"
+                  >
+                    {{ categories[i].categoryName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button mat-raised-button color="primary" (click)="addProduct(); getAllProduct();">
+              Add
+            </button>
+            </form>
+          </div>
+        </form>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col">
+    <mat-card>
+      <mat-card-title> Categories </mat-card-title>
+      <div *ngFor="let categor of categories">
+        <mat-card>
+          <div>
+            <mat-form-field appearance="fill">
+              <input
+                matInput
+                placeholder="Enter a Category Name"
+                name="categoryName"
+                [(ngModel)]="categoryName"
+                (ngModelChange)="validate()"
+              />
+              <mat-label>{{ categor.categoryName }}</mat-label>
+            </mat-form-field>
+          </div>
+          <div>
+            <button
+              mat-raised-button
+              color="accent"
+              (click)="updateCategory(category)"
+            >
+              <mat-icon>build</mat-icon>
+              Edit
+            </button>
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="delCategory(categor._id)"
+            >
+              <mat-icon>delete_forever</mat-icon>
+              Delete
+            </button>
+          </div>
+        </mat-card>
+      </div>
+    </mat-card>
+  </div>
+  <div class="col">
+    <mat-card>
+      <mat-card-title> Products </mat-card-title>
+      <div *ngFor="let product of productss">
+        <mat-card>
+          <div>
+            <div>
+              <mat-form-field appearance="fill">
+                <input
+                  matInput
+                  placeholder="Enter a Product Name"
+                  name="prodName"
+                  [(ngModel)]="prodName"
+                  (ngModelChange)="validate()"
+                />
+                <mat-label>{{ product.prodName }}</mat-label>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="fill">
+                <input
+                  matInput
+                  placeholder="Enter a Product Price"
+                  name="prodPrice"
+                  [(ngModel)]="prodPrice"
+                  (ngModelChange)="validate()"
+                />
+                <mat-label>{{ product.prodPrice }}</mat-label>
+              </mat-form-field>
+            </div>
+            <form [formGroup]="form">
+              <div><label for="categories">Category:</label></div>
+              <mat-form-field appearance="fill">
+                <mat-select
+                  formControlName="categories"
+                  id="categories"
+                  placeholder="Enter a Category."
+                >
+                  <mat-option
+                    (click)="onCategoryChange(categories[i]._id)"
+                    *ngFor="let categor of categories; let i = index"
+                    [value]="categories[i]._id"
+                  >
+                    {{ categories[i].categoryName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </form>
+            <mat-label>{{ product.catName }}</mat-label>
+          </div>
+          <div>
+            <button mat-raised-button color="accent">
+              <mat-icon>build</mat-icon>
+              Edit
+            </button>
+            <button
+              mat-raised-button
+              color="warn"
+              (click)="delProduct(product._id)"
+            >
+              <mat-icon>delete</mat-icon>
+              Delete
+            </button>
+          </div>
+        </mat-card>
+      </div>
+    </mat-card>
+  </div>
+</div>
